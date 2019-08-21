@@ -21,7 +21,17 @@
 
 </head>
 <body>
+<%
+    Integer loggedIn = (Integer)session.getAttribute("login");
+    if(loggedIn != null){
+        if(loggedIn !=0){
+%>
+<div class="container my-3"><a href="Logout" type="button" class="btn btn-danger">Logout</a></div>
+<%
+        }
+    }
 
+%>
     <div class="container my-5  ">
         <div class="card align-items-center">
             <div class="card-body">

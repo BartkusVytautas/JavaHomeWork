@@ -33,7 +33,7 @@ public class Image implements Serializable {
         if (images == null) {
             try {
                 images = new LinkedList<>();
-                FileInputStream fi = new FileInputStream(new File("C:/Users/User/Documents/JavaHomeWork/Gallery/data/images.txt"));
+                FileInputStream fi = new FileInputStream(new File("C:/Users/Vytautas/Documents/JavaHomeWork/Gallery/data/images.txt"));
                 ObjectInputStream ois = new ObjectInputStream(fi);
                 images = (LinkedList<Image>) ois.readObject();
                 ois.close();
@@ -48,7 +48,7 @@ public class Image implements Serializable {
         try {
             images.add(new Image(url, description));
 
-            FileOutputStream fo = new FileOutputStream(new File("C:/Users/User/Documents/JavaHomeWork/Gallery/data/images.txt"));
+            FileOutputStream fo = new FileOutputStream(new File("C:/Users/Vytautas/Documents/JavaHomeWork/Gallery/data/images.txt"));
             ObjectOutputStream oos = new ObjectOutputStream(fo);
             oos.writeObject(images);
             oos.close();

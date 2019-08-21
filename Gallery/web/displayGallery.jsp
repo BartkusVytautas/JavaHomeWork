@@ -20,6 +20,17 @@
     <title>Gallery</title>
 
 </head>
+<%
+    Integer loggedIn = (Integer)session.getAttribute("login");
+    if(loggedIn != null){
+        if(loggedIn !=0){
+%>
+<div class="container my-3"><a href="Logout" type="button" class="btn btn-danger">Logout</a></div>
+<%
+        }
+    }
+
+%>
 <body>
 <div class="container align-items-center">
     <a href="index.jsp"><button type="button" class="btn btn-success my-5">Home</button></a>

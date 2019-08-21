@@ -18,6 +18,17 @@
     <title>Welcome!</title>
 </head>
 <body>
+<%
+    Integer loggedIn = (Integer)session.getAttribute("login");
+    if(loggedIn != null){
+        if(loggedIn !=0){
+%>
+<div class="container my-3"><a href="Logout" type="button" class="btn btn-danger">Logout</a></div>
+<%
+        }
+    }
+
+%>
     <div class="container-fluid my-5">
         <div class="row">
             <div class="col-md-6">
@@ -32,6 +43,9 @@
                                 <input type="text"
                                        class="form-control" name="description" id="input2" aria-describedby="helpId" placeholder="Description here" required>
                                 <button name="add" type="submit" class="btn btn-success my-3">Add</button>
+                                <a href="Display" class="btn btn-primary">View the gallery</a>
+
+
                             </div>
                         </form>
                     </div>

@@ -20,7 +20,7 @@ public class Servlet extends HttpServlet {
             return;
         }
         Image.addImage(url, description );
-        response.sendRedirect("Remove");
+        response.sendRedirect("gallery.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
