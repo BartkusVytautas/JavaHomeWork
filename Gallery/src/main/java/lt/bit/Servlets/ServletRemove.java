@@ -17,9 +17,13 @@ public class ServletRemove extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int index= Integer.parseInt(request.getParameter("delete"));
+        if (request.getSession().getAttribute("login") == null || (int)request.getSession().getAttribute("login") == 0){
+            response.sendRedirect("Login");
+            return;
+        }
+        int index = Integer.parseInt(request.getParameter("delete"));
         Image.getImages().remove(index);
-        RequestDispatcher dispatcher =request.getRequestDispatcher("/Display");
+        RequestDispatcher dispatcher =request.getRequestDispatcher("/Add");
         dispatcher.forward(request, response);
     }
 }

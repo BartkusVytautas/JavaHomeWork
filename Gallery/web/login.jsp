@@ -33,6 +33,7 @@
             <input id="password" class="form-control" type="password" required name="password">
         </div>
         <input type=submit class="btn btn-primary" value="Login">
+        <a href="http://localhost:8080/Gallery_Web_exploded/Register" class="btn btn-success">Register</a>
     </form>
 </div>
 

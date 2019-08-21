@@ -30,7 +30,7 @@
         </div>
         <div class="card my-5 align-items-center">
             <div class="card-body ">
-                <a href="http://localhost:8080/Gallery_Web_exploded/Display"><button name="display" class="btn btn-success">View the gallery</button></a>
+                <a href="http://localhost:8080/Gallery_Web_exploded/Add"><button name="display" class="btn btn-success">View the gallery</button></a>
             </div>
         </div>
     </div>

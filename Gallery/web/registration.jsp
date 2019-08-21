@@ -22,7 +22,7 @@
 </head>
 <body>
 <div class="container align-items-center">
-    <form action="" method=post
+    <form action="Register" method=post
           oninput='password2.setCustomValidity(password1.value !== password2.value ? "Passwords do not match." : "")'>
         <div class="form-group">
             <label for="username">User ID:</label>
