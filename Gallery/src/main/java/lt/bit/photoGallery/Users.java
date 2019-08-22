@@ -4,13 +4,13 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 @SuppressWarnings("ALL")
-public class Users {
+public class Users implements Serializable{
 
     private String user;
     private String password;
     private static LinkedList<Users> userList = null;
 
-    private Users(String user, String password) {
+    public Users(String user, String password) {
         this.user = user;
         this.password = password;
     }
@@ -34,7 +34,7 @@ public class Users {
         if (userList == null) {
             try {
                 userList = new LinkedList<>();
-                FileInputStream fi = new FileInputStream(new File("C:/Users/Vytautas/Documents/JavaHomeWork/Gallery/data/users.txt"));
+                FileInputStream fi = new FileInputStream(new File("C:/Users/User/Documents/JavaHomeWork/Gallery/data/users.txt"));
                 ObjectInputStream ois = new ObjectInputStream(fi);
                 userList = (LinkedList<Users>) ois.readObject();
                 ois.close();
@@ -48,7 +48,7 @@ public class Users {
         try {
             userList.add(new Users(userID, password));
 
-            FileOutputStream fo = new FileOutputStream(new File("C:/Users/Vytautas/Documents/JavaHomeWork/Gallery/data/users.txt"));
+            FileOutputStream fo = new FileOutputStream(new File("C:/Users/User/Documents/JavaHomeWork/Gallery/data/users.txt"));
             ObjectOutputStream oos = new ObjectOutputStream(fo);
             oos.writeObject(userList);
             oos.close();
