@@ -1,0 +1,13 @@
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/students?useSSL=false</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">admin</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+        <property name="show_sql">true</property>
+        <!-- Use Annotation-based mapping metadata -->
+        <mapping class="lt.bit.Test"/>
+    </session-factory>
+</hibernate-configuration>
