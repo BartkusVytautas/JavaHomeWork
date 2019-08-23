@@ -15,9 +15,11 @@ public class Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = request.getParameter("url");
         String description = request.getParameter("description");
-        if (request.getSession().getAttribute("login") == null || (int)request.getSession().getAttribute("login") == 0){
-            response.sendRedirect("Login");
-            return;
+        if (request.getSession().getAttribute("login") == null) {
+            if ((int) request.getSession().getAttribute("login") == 0) {
+                response.sendRedirect("Login");
+                return;
+            }
         }
         Image.addImage(url, description );
         response.sendRedirect("gallery.jsp");
