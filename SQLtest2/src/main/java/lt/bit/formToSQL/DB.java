@@ -2,6 +2,8 @@ package lt.bit.formToSQL;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
+import com.mysql.cj.jdbc.*;
+import com.mysql.cj.jdbc.Driver;
 
 public class DB {
     private static DB db = null;
@@ -59,8 +61,9 @@ public class DB {
 
     private static boolean doesUserExist(String user) throws SQLException, ClassNotFoundException{
         Class.forName("com.mysql.cj.jdbc.Driver");
+        Driver d;
         Connection connect = DriverManager.getConnection(urlDB);
-        PreparedStatement statement = connect.prepareStatement("select userID from employees WHERE user_name=? ");
+        PreparedStatement statement = connect.prepareStatement("select userID from users WHERE user_name=? ");
         statement.setString(1,user);
         ResultSet resultSet = statement.executeQuery();
         if(resultSet.next()){
