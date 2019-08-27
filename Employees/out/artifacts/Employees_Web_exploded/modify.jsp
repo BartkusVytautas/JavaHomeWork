@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: User
+  User: Vytautas
   Date: 8/27/2019
-  Time: 2:35 PM
+  Time: 11:17 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -30,32 +30,32 @@
     <h1 class="my-3">Employee info</h1>
     <div class="card">
         <div class="card-body">
-            <form method="post" action="Add">
+            <form method="post" action="Modify">
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text"
-                           class="form-control" name="name" id="name" aria-describedby="helpId"  required>
+                           class="form-control" name="name" id="name" aria-describedby="helpId" value="${emp.getName()}"  required>
                     <label for="surname">Surname:</label>
                     <input type="text"
-                           class="form-control" name="surname" id="surname" aria-describedby="helpId"  required>
+                           class="form-control" name="surname" id="surname" aria-describedby="helpId" value="${emp.getSurname()}"  required>
                     <label for="gender">Gender:</label>
-                    <select class="form-control" id="gender" name="gender">
-                        <option>Male</option>
-                        <option>Female</option>
+                    <select class="form-control" id="gender" name="gender"  value="${emp.getGender()}">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                     </select>
                     <label for="phone">Phone:</label>
                     <input type="text"
-                           class="form-control" name="phone" id="phone" aria-describedby="helpId" required>
+                           class="form-control" name="phone" id="phone" aria-describedby="helpId" value="${emp.getPhone()}" required>
                     <label for="birthday">Birthday:</label>
                     <input type="text"
-                           class="form-control" name="birthday" id="birthday" aria-describedby="helpId"  required>
+                           class="form-control" name="birthday" id="birthday" aria-describedby="helpId" value="${emp.getBirthday()}"  required>
                     <label for="education">Education:</label>
                     <input type="text"
-                           class="form-control" name="education" id="education" aria-describedby="helpId"  required>
+                           class="form-control" name="education" id="education" aria-describedby="helpId" value="${emp.getEducation()}"  required>
                     <label for="salary">Salary:</label>
                     <input type="number"
-                           class="form-control" name="salary" id="salary" aria-describedby="helpId"  required>
-                    <input type="submit" class="btn btn-success my-3" value="Add employee">
+                           class="form-control" name="salary" id="salary" aria-describedby="helpId" value="${emp.getSalary()}" required>
+                    <input type="submit" class="btn btn-success my-3" value="Save changes">
 
                 </div>
             </form>

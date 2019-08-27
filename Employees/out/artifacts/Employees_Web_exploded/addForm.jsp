@@ -19,6 +19,11 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Add</title>
+    <style>
+        label{
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
 <div class="container my-5">
@@ -50,6 +55,7 @@
                     <label for="salary">Salary:</label>
                     <input type="number"
                            class="form-control" name="salary" id="salary" aria-describedby="helpId"  required>
+                    <input type="submit" class="btn btn-success my-3" value="Add employee">
 
                 </div>
             </form>

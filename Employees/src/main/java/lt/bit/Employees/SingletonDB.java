@@ -20,7 +20,7 @@ public class SingletonDB {
 //                        throw new RuntimeException("Can't register driver!");
 //                    }
 
-                connection = DriverManager.getConnection("jdbc:mysql://localhost/studentai?user=root&password=admin");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/employees?user=root&password=admin");
             }catch (Exception e) {
                 e.printStackTrace();
             }

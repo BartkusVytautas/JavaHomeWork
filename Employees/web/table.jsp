@@ -23,6 +23,7 @@
 <body>
 
 <div class="container py-5">
+    <h1 class="my-2">Employees</h1>
  <table class="table">
     <thead>
         <tr>
@@ -48,7 +49,7 @@
                     <td>${employee.getEducation()}</td>
                     <td>${employee.getSalary()}</td>
                     <td><a href="Delete?delete=${employee.getId()}" class="btn btn-danger">Delete</a></td>
-                    <td><a href="" class="btn btn-info">Modify</a></td>
+                    <td><a href="Modify?modify=${employee.getId()}" class="btn btn-info">Modify</a></td>
                 </tr>
             </c:forEach>
         </tbody>
