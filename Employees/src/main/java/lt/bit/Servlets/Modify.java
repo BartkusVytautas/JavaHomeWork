@@ -24,7 +24,7 @@ public class Modify extends HttpServlet {
         String education =  request.getParameter("education");
         String birthday = request.getParameter("birthday");
         int salary = Integer.parseInt(request.getParameter("salary"));
-        Employee.updateDB(getId, name, surname, phone, gender, education, birthday, salary);
+        Employee.updateDB(getId, name, surname, gender, phone, education, birthday, salary);
         response.sendRedirect("Display");
     }
 

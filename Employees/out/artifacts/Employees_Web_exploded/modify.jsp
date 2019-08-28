@@ -34,27 +34,27 @@
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text"
-                           class="form-control" name="name" id="name" aria-describedby="helpId" value="${emp.getName()}"  required>
+                           class="form-control" name="name" id="name" aria-describedby="helpId" pattern="^[A-Za-z]+$" value="${emp.getName()}"  required>
                     <label for="surname">Surname:</label>
                     <input type="text"
-                           class="form-control" name="surname" id="surname" aria-describedby="helpId" value="${emp.getSurname()}"  required>
+                           class="form-control" name="surname" id="surname" aria-describedby="helpId" pattern="^[A-Za-z]+$" value="${emp.getSurname()}"  required>
                     <label for="gender">Gender:</label>
-                    <select class="form-control" id="gender" name="gender"  value="${emp.getGender()}">
+                    <select class="form-control" id="gender" name="gender">
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
                     <label for="phone">Phone:</label>
                     <input type="text"
-                           class="form-control" name="phone" id="phone" aria-describedby="helpId" value="${emp.getPhone()}" required>
+                           class="form-control" name="phone" id="phone" aria-describedby="helpId" pattern="^[+]\d{11}$" value="${emp.getPhone()}" required>
                     <label for="birthday">Birthday:</label>
-                    <input type="text"
-                           class="form-control" name="birthday" id="birthday" aria-describedby="helpId" value="${emp.getBirthday()}"  required>
+                    <input type="date"
+                           class="form-control" name="birthday" id="birthday" aria-describedby="helpId" min="1970-01-01" max="2002-01-01" value="${emp.getBirthday()}"  required>
                     <label for="education">Education:</label>
                     <input type="text"
-                           class="form-control" name="education" id="education" aria-describedby="helpId" value="${emp.getEducation()}"  required>
+                           class="form-control" name="education" id="education" aria-describedby="helpId" pattern="^[A-Za-z]+$" value="${emp.getEducation()}"  required>
                     <label for="salary">Salary:</label>
                     <input type="number"
-                           class="form-control" name="salary" id="salary" aria-describedby="helpId" value="${emp.getSalary()}" required>
+                           class="form-control" name="salary" id="salary" aria-describedby="helpId" pattern="^[0-9]+$" value="${emp.getSalary()}" required>
                     <input type="submit" class="btn btn-success my-3" value="Save changes">
 
                 </div>

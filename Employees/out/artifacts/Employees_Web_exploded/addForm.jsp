@@ -34,10 +34,10 @@
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text"
-                           class="form-control" name="name" id="name" aria-describedby="helpId"  required>
+                           class="form-control" name="name" id="name" aria-describedby="helpId" pattern="^[A-Za-z]+$"  required>
                     <label for="surname">Surname:</label>
                     <input type="text"
-                           class="form-control" name="surname" id="surname" aria-describedby="helpId"  required>
+                           class="form-control" name="surname" id="surname" aria-describedby="helpId" pattern="^[A-Za-z]+$"  required>
                     <label for="gender">Gender:</label>
                     <select class="form-control" id="gender" name="gender">
                         <option>Male</option>
@@ -45,16 +45,16 @@
                     </select>
                     <label for="phone">Phone:</label>
                     <input type="text"
-                           class="form-control" name="phone" id="phone" aria-describedby="helpId" required>
+                           class="form-control" name="phone" id="phone" aria-describedby="helpId" pattern="^[+]\d{11}$" required>
                     <label for="birthday">Birthday:</label>
-                    <input type="text"
-                           class="form-control" name="birthday" id="birthday" aria-describedby="helpId"  required>
+                    <input type="date"
+                           class="form-control" name="birthday" id="birthday" aria-describedby="helpId" min="1970-01-01" max="2002-01-01" required>
                     <label for="education">Education:</label>
                     <input type="text"
-                           class="form-control" name="education" id="education" aria-describedby="helpId"  required>
+                           class="form-control" name="education" id="education" aria-describedby="helpId" pattern="^[A-Za-z]+$" required>
                     <label for="salary">Salary:</label>
                     <input type="number"
-                           class="form-control" name="salary" id="salary" aria-describedby="helpId"  required>
+                           class="form-control" name="salary" id="salary" aria-describedby="helpId" pattern="^[0-9]+$" required>
                     <input type="submit" class="btn btn-success my-3" value="Add employee">
 
                 </div>

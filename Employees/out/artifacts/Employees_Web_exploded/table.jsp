@@ -18,12 +18,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title></title>
+    <title>Employees</title>
 </head>
 <body>
 
 <div class="container py-5">
-    <h1 class="my-2">Employees</h1>
+    <h1 class="my-4">Employees</h1>
  <table class="table">
     <thead>
         <tr>
@@ -34,7 +34,8 @@
             <th>phone</th>
             <th>birthday</th>
             <th>education</th>
-            <th>salary</th>
+            <th>salary, eur</th>
+            <th>options</th>
         </tr>
     </thead>
         <tbody>
@@ -48,13 +49,15 @@
                     <td>${employee.getBirthday()}</td>
                     <td>${employee.getEducation()}</td>
                     <td>${employee.getSalary()}</td>
-                    <td><a href="Delete?delete=${employee.getId()}" class="btn btn-danger">Delete</a></td>
-                    <td><a href="Modify?modify=${employee.getId()}" class="btn btn-info">Modify</a></td>
+                    <td><a href="Delete?delete=${employee.getId()}" class="btn btn-danger">Delete</a>
+                        <a href="Modify?modify=${employee.getId()}" class="btn btn-info mx-3">Modify</a>
+                        <a href="" class="btn btn-warning mx-3">Positions</a>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>
 </table>
-    <a href="Add" class="btn btn-success my-3">Add</a>
+    <a href="Add" class="btn btn-success my-4">Add new employee</a>
 </div>
 
 

@@ -21,7 +21,13 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container py-5"><a href="Display" class="btn btn-primary">View employees</a></div>
+<div class="container py-5">
+    <div class="card">
+        <div class="card-body text-center">
+            <a href="Display" class="btn btn-primary display:inline">View employees</a>
+        </div>
+    </div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

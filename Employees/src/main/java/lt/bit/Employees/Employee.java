@@ -123,7 +123,7 @@ public class Employee {
                 String surname = resultSet.getString("surname");
                 String gender = resultSet.getString("gender");
                 String phone = resultSet.getString("phone");
-                String birthday = resultSet.getString("birthday");
+                String birthday = resultSet.getString("birthday").substring(0, 10);
                 String education = resultSet.getString("education");
                 int salary = resultSet.getInt("salary");
                 emps.add(new Employee(i, ID, name, surname, gender, phone, birthday, education, salary));
