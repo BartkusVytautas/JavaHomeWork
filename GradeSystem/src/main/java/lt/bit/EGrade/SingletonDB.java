@@ -12,7 +12,7 @@ public class SingletonDB {
         if(connection == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://localhost/student_grades?user=root&password=admin");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/grades?user=root&password=admin");
             }catch (Exception e) {
                 e.printStackTrace();
             }

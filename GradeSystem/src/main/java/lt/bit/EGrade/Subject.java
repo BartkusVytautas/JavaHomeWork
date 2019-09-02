@@ -76,7 +76,7 @@ public class Subject {
                     subjects.add(new Subject(name, description , ID));
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
                 subjects = null;
             }
         }
@@ -94,6 +94,7 @@ public class Subject {
 
         }catch (Exception e){
             subject = null;
+            e.printStackTrace();
         }
         return subject;
     }
@@ -110,7 +111,7 @@ public class Subject {
             Grades.grades = null;
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -118,7 +119,7 @@ public class Subject {
         try {
             PreparedStatement preparedStatement;
             for(Grades g: Grades.getGrades()){
-                if(Subject.getSubject(id).getId() == g.getId()){
+                if(Subject.getSubject(id).getId() == g.getSubject().getId()){
                     Grades.delete(g);
                 }
             }

@@ -98,7 +98,7 @@
                                 <td>#</td>
                                 <td>${subject.getName()}</td>
                                 <td>${subject.getDescription()}</td>
-                                <td><a href="Delete?deletesub=${subject.getId()}" class="btn btn-danger">Delete</a><a href="" class="btn btn-info mx-3">Add a grade/Modify</a></td>
+                                <td><a href="Delete?deletesub=${subject.getId()}" class="btn btn-danger">Delete</a><a href="Addgrade" class="btn btn-info mx-3">Add a grade/Modify</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

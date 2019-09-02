@@ -32,7 +32,7 @@ public class Grades{
             this.subject = Subject.getSubject(resultSet.getInt("subject_id"));
             this.subject.getSubjectGrades().put(this.id, this);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -85,7 +85,7 @@ public class Grades{
                 grades.add(new Grades(ID, grade));
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             grades = null;
         }
         return grades;
@@ -107,6 +107,7 @@ public class Grades{
 
         }catch (Exception e){
             grades = null;
+            e.printStackTrace();
         }
         return grades;
     }

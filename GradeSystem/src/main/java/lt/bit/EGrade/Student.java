@@ -50,7 +50,7 @@ public class Student {
                     students.add(new Student(name, surname, ID));
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
                 students = null;
             }
         }
@@ -118,7 +118,7 @@ public class Student {
         try {
             PreparedStatement preparedStatement;
             for(Grades g: Grades.getGrades()){
-                if(Student.getStudent(id).getId() == g.getId()){
+                if(Student.getStudent(id).getId() == g.getStudent().getId()){
                     Grades.delete(g);
                 }
             }
