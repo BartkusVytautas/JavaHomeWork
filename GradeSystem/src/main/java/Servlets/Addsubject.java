@@ -10,23 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.LinkedList;
 
-@WebServlet(name = "Display", urlPatterns = {"/Display"})
-public class Display extends HttpServlet {
+@WebServlet(name = "Addsubject", urlPatterns = {"/Addsubject"})
+public class Addsubject extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        Subject.addSubject(name, description);
+        request.setAttribute("canAddSubj", null);
+        RequestDispatcher dispatcher =request.getRequestDispatcher("/Display");
+        dispatcher.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HashSet<Student> students;
-        HashSet<Subject> subjects;
-        students = Student.studentList();
-        subjects = Subject.subjectList();
-        request.setAttribute("subjects", subjects);
-        request.setAttribute("students", students);
-        RequestDispatcher dispatcher =request.getRequestDispatcher("/table.jsp");
+        request.setAttribute("canAddSubj", 1);
+        RequestDispatcher dispatcher =request.getRequestDispatcher("/Display");
         dispatcher.forward(request, response);
     }
 }

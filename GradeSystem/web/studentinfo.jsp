@@ -37,6 +37,24 @@
 <body>
     <div class="container my-5">
         <h1>${student.getName()} ${student.getSurname()}</h1>
+        <c:if test="${modifyStudent == null}">
+             <a href="ModifyStudent?modifystudent=1&studentid=${student.getId()}" class="btn btn-success my-3">Change info</a>
+            <a href="Display" class="btn btn-warning mx-2">Go back</a>
+        </c:if>
+        <c:if test="${modifyStudent != null}">
+            <form method="post" action="ModifyStudent">
+                <div class="form-group">
+                    <label for="name">Student name: </label>
+                    <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp" value="${student.getName()}">
+                </div>
+                <div class="form-group">
+                    <label for="surname">Surname: </label>
+                    <input type="text" name="surname" class="form-control" id="surname" value="${student.getSurname()}">
+                </div>
+                <button type="submit" name="id" class="btn btn-success" value="${student.getId()}">Change</button>
+            </form>
+        </c:if>
+
         <table class="table my-3">
             <thead class="thead-dark">
                 <tr>
@@ -50,7 +68,12 @@
                     <tr>
                         <td>${grade.value.getSubject().getName()}</td>
                         <td>${grade.value.getSubject().getDescription()}</td>
-                        <td>${grade.value.getGrade()}</td>
+                        <c:if test="${grade.value.getGrade() == 0}">
+                            <td>Not graded yet</td>
+                        </c:if>
+                        <c:if test="${grade.value.getGrade() != 0}">
+                            <td>${grade.value.getGrade()}</td>
+                        </c:if>
                     </tr>
                 </c:forEach>
             </tbody>

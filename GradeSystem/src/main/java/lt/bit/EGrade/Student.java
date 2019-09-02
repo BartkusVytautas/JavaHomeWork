@@ -21,17 +21,18 @@ public class Student {
         this.surname = surname;
         this.id = id;
         students.add(this);
+        Grades.initGradesForStudents(this);
     }
 
     public Student(String name, String surname) {
         this.name = name;
         this.surname = surname;
-        students.add(this);
     }
 
     public String getName() {
         return name;
     }
+
     public static HashSet<Student> studentList(){
         if(students == null){
             students = new HashSet<>();
@@ -39,7 +40,7 @@ public class Student {
                 PreparedStatement preparedStatement;
                 ResultSet resultSet;
 
-                preparedStatement = SingletonDB.connectToDB().prepareStatement("SELECT * FROM students");
+                preparedStatement = SingletonDB.connectToDB().prepareStatement("SELECT * FROM students ");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
 
@@ -106,26 +107,28 @@ public class Student {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, surname);
             preparedStatement.executeUpdate();
-            students.add(new Student(name, surname));
+            Student.students = null;
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
     public static void delete(Integer id) {
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = SingletonDB.connectToDB().prepareStatement
-                    ("DELETE FROM grades where student_id = ?");
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
+            for(Grades g: Grades.getGrades()){
+                if(Student.getStudent(id).getId() == g.getId()){
+                    Grades.delete(g);
+                }
+            }
             students.remove(Student.getStudent(id));
             preparedStatement = SingletonDB.connectToDB().prepareStatement
                     ("DELETE FROM students where id = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
+            Grades.grades = null;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,7 +138,7 @@ public class Student {
         try {
             PreparedStatement preparedStatement;
             preparedStatement = SingletonDB.connectToDB().prepareStatement
-                    ("UPDATE employees set name = ?, surname = ? where id = ?");
+                    ("UPDATE students set name = ?, surname = ? where id = ?");
             preparedStatement.setString(1, this.name);
             preparedStatement.setString(2, this.surname);
             preparedStatement.setInt(3, this.id);
@@ -154,5 +157,9 @@ public class Student {
     @Override
     public int hashCode() {
         return this.id;
+    }
+
+    public String toString (){
+        return this.name +" " + this.surname;
     }
 }

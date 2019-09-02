@@ -20,12 +20,12 @@ public class Subject {
         this.description = description;
         this.id = id;
         subjects.add(this);
+        Grades.initGradesForSubjects(this);
     }
 
     public Subject(String name, String description) {
         this.name = name;
         this.description = description;
-        subjects.add(this);
     }
 
     public String getName() {
@@ -84,19 +84,13 @@ public class Subject {
     }
 
     public static Subject getSubject(Integer id){
-        Subject subject;
+        Subject subject = null;
         try {
-            PreparedStatement preparedStatement;
-            ResultSet resultSet;
-
-            preparedStatement = SingletonDB.connectToDB().prepareStatement("SELECT * FROM subjects WHERE id = ?");
-            preparedStatement.setInt(1, id);
-            resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            Integer ID = resultSet.getInt("id");
-            String name = resultSet.getString("name");
-            String description = resultSet.getString("description");
-            subject = new Subject(name, description, ID);
+            for(Subject s: Subject.subjectList()){
+                if(id == s.getId()){
+                    subject = s;
+                }
+            }
 
         }catch (Exception e){
             subject = null;
@@ -112,6 +106,8 @@ public class Subject {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, description);
             preparedStatement.executeUpdate();
+            Subject.subjects = null;
+            Grades.grades = null;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -121,14 +117,18 @@ public class Subject {
     public static void delete(Integer id) {
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = SingletonDB.connectToDB().prepareStatement
-                    ("DELETE FROM grades where subject_id = ?");
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
+            for(Grades g: Grades.getGrades()){
+                if(Subject.getSubject(id).getId() == g.getId()){
+                    Grades.delete(g);
+                }
+            }
+            subjects.remove(Subject.getSubject(id));
             preparedStatement = SingletonDB.connectToDB().prepareStatement
                     ("DELETE FROM subjects where id = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
+
+            Grades.grades = null;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -157,6 +157,10 @@ public class Subject {
     @Override
     public int hashCode() {
         return this.id;
+    }
+
+    public String toString(){
+        return this.name + " " + this.description;
     }
 
 

@@ -10,7 +10,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>EGrade</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -61,16 +61,18 @@
                             </c:forEach>
                         </tbody>
                     </table>
-                    <a href="Addstudent" class="btn btn-success my-3">Add new student</a>
+                    <c:if test="${canAdd == null}">
+                        <a href="Addstudent" class="btn btn-success my-3">Add new student</a>
+                    </c:if>
                     <c:if test="${canAdd != null}">
                         <form method="post" action="Addstudent">
                             <div class="form-group">
                                 <label for="name">Student name: </label>
-                                <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name">
+                                <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="surname">Surname: </label>
-                                <input type="text" name="surname" class="form-control" id="surname" placeholder="Surname">
+                                <input type="text" name="surname" class="form-control" id="surname">
                             </div>
                             <button type="submit" class="btn btn-primary">Add</button>
                         </form>
@@ -96,12 +98,27 @@
                                 <td>#</td>
                                 <td>${subject.getName()}</td>
                                 <td>${subject.getDescription()}</td>
-                                <td><a href="" class="btn btn-danger">Delete</a><a href="" class="btn btn-info mx-3">Add a grade/Modify</a></td>
+                                <td><a href="Delete?deletesub=${subject.getId()}" class="btn btn-danger">Delete</a><a href="" class="btn btn-info mx-3">Add a grade/Modify</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
-                    <a href="" class="btn btn-success my-3">Add new subject</a>
+                    <c:if test="${canAddSubj == null}">
+                        <a href="Addsubject" class="btn btn-success my-3">Add new subject</a>
+                    </c:if>
+                    <c:if test="${canAddSubj != null}">
+                        <form method="post" action="Addsubject">
+                            <div class="form-group">
+                                <label for="sname">Subject name: </label>
+                                <input type="text" name="name" class="form-control" id="sname" aria-describedby="emailHelp">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description: </label>
+                                <input type="text" name="description" class="form-control" id="description">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </c:if>
 
                 </div>
             </div>
