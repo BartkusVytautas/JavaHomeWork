@@ -2,38 +2,34 @@ package lt.bit.EGrade;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class Subject {
     private String name;
     private String description;
     private Integer id;
-    private Integer grade = null;
+    private HashMap<Integer, Grades> subjectGrades = null;
+    private static HashSet<Subject> subjects = null;
 
     public Subject() {
     }
 
-    public Subject(String name, String description, Integer id) {
+    private Subject(String name, String description, Integer id) {
         this.name = name;
         this.description = description;
         this.id = id;
+        subjects.add(this);
     }
 
     public Subject(String name, String description) {
         this.name = name;
         this.description = description;
+        subjects.add(this);
     }
 
     public String getName() {
         return name;
-    }
-
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
     }
 
     public String getDescription() {
@@ -56,26 +52,56 @@ public class Subject {
         this.id = id;
     }
 
-    public static LinkedList<Subject> getSubjects() {
-        LinkedList<Subject> subjects = new LinkedList<>();
+    public  HashMap<Integer, Grades> getSubjectGrades(){
+        if (subjectGrades == null){
+            subjectGrades = new HashMap<>();
+        }
+        return subjectGrades;
+    }
+
+    public static HashSet<Subject> subjectList(){
+        if(subjects == null){
+            subjects = new HashSet<>();
+            try {
+                PreparedStatement preparedStatement;
+                ResultSet resultSet;
+
+                preparedStatement = SingletonDB.connectToDB().prepareStatement("SELECT * FROM subjects");
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+
+                    Integer ID = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String description = resultSet.getString("description");
+                    subjects.add(new Subject(name, description , ID));
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                subjects = null;
+            }
+        }
+        return subjects;
+    }
+
+    public static Subject getSubject(Integer id){
+        Subject subject;
         try {
             PreparedStatement preparedStatement;
             ResultSet resultSet;
 
-            preparedStatement = SingletonDB.connectToDB().prepareStatement("SELECT * FROM subjects");
+            preparedStatement = SingletonDB.connectToDB().prepareStatement("SELECT * FROM subjects WHERE id = ?");
+            preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
+            resultSet.next();
+            Integer ID = resultSet.getInt("id");
+            String name = resultSet.getString("name");
+            String description = resultSet.getString("description");
+            subject = new Subject(name, description, ID);
 
-                Integer ID = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String description = resultSet.getString("description");
-                subjects.add(new Subject(name, description, ID));
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            subjects = null;
+        }catch (Exception e){
+            subject = null;
         }
-        return subjects;
+        return subject;
     }
 
     public static void addSubject(String name, String description) {
@@ -92,9 +118,13 @@ public class Subject {
         }
     }
 
-    public static void delete(int id) {
+    public static void delete(Integer id) {
         try {
             PreparedStatement preparedStatement;
+            preparedStatement = SingletonDB.connectToDB().prepareStatement
+                    ("DELETE FROM grades where subject_id = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
             preparedStatement = SingletonDB.connectToDB().prepareStatement
                     ("DELETE FROM subjects where id = ?");
             preparedStatement.setInt(1, id);
@@ -116,6 +146,17 @@ public class Subject {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public boolean equals (Object o){
+        if (this.id == ((Subject) o).getId()){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id;
     }
 
 
