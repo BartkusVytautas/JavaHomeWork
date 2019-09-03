@@ -35,6 +35,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+<a href="Logout" class="btn btn-danger my-4 mx-4">Logout</a>
 <div class="container-fluid">
     <h1 class="my-5">Students info</h1>
     <div class="row">
@@ -83,6 +84,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
+                    <form method="post" action="Modifysubject">
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
@@ -95,14 +97,25 @@
                         <tbody>
                         <c:forEach items="${subjects}" var="subject">
                             <tr>
+                                <c:if test="${subm == null || subject.getId() != subm}">
                                 <td>#</td>
                                 <td>${subject.getName()}</td>
                                 <td>${subject.getDescription()}</td>
-                                <td><a href="Delete?deletesub=${subject.getId()}" class="btn btn-danger">Delete</a><a href="Addgrade" class="btn btn-info mx-3">Modify</a></td>
+                                <td><a href="Delete?deletesub=${subject.getId()}" class="btn btn-danger">Delete</a><a href="Modifysubject?subjectid=${subject.getId()}" class="btn btn-warning mx-3">Modify</a></td>
+                                </c:if>
+                                <c:if test="${subm != null}">
+                                    <c:if test="${subject.getId() == subm}">
+                                        <td>#</td>
+                                        <td><input class="form-control" name="subjectn" id="subjectn" value="${subject.getName()}"></td>
+                                        <td><input class="form-control" name="description" id="subjectdescription" value="${subject.getDescription()}"></td>
+                                        <td><button name="subid" value="${subject.getId()}" type="submit" class="btn btn-success">Save</button></td>
+                                    </c:if>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
+                    </form>
                     <c:if test="${canAddSubj == null}">
                         <a href="Addsubject" class="btn btn-success my-3">Add new subject</a>
                         <a href="Addgrade" class="btn btn-info mx-3">Add grades</a>

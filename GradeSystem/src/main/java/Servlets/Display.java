@@ -20,6 +20,10 @@ public class Display extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getSession().getAttribute("login") == null || (Integer)request.getSession().getAttribute("login") == 0){
+            response.sendRedirect("Login");
+            return;
+        }
         HashSet<Student> students;
         HashSet<Subject> subjects;
         students = Student.studentList();

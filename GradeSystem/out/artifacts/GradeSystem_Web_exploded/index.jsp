@@ -65,11 +65,11 @@
                 <div class="card">
                     <div class="card-header">Login to GradeBook</div>
                     <div class="card-body">
-                        <form action="" method="">
+                        <form action="Login" method="post">
                             <div class="form-group row">
-                                <label for="email_address" class="col-md-4 col-form-label text-md-right">Teacher ID</label>
+                                <label for="user" class="col-md-4 col-form-label text-md-right">Teacher ID</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="email_address" class="form-control" name="email-address" required autofocus>
+                                    <input type="text" id="user" class="form-control" name="user" required autofocus>
                                 </div>
                             </div>
 
@@ -84,7 +84,7 @@
                                 <div class="col-md-6 offset-md-4">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="remember"> Remember Me
+                                            <input value="rem" type="checkbox" name="remember"> Remember Me
                                         </label>
                                     </div>
                                 </div>

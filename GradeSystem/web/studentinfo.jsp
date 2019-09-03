@@ -35,6 +35,7 @@
     </style>
 </head>
 <body>
+    <a href="Logout" class="btn btn-danger my-4 mx-4">Logout</a>
     <div class="container my-5">
         <h1>${student.getName()} ${student.getSurname()}</h1>
         <c:if test="${modifyStudent == null}">
