@@ -39,41 +39,42 @@
     <div class="card">
         <div class="card-body">
             <c:if test="${form1 == null}">
-            <form method="post" action="Addgrade">
-                <div class="form-group">
-                <select class="form-control" id="student" name="student">
-                    <option  selected="selected">Choose a student</option>
-                    <c:forEach items="${studentss}" var="student">
-                        <option value="${student.getId()}">${student.getName()} ${student.getSurname()}</option>
-                    </c:forEach>
-                </select>
-                    <button type="submit" class="btn btn-success my-3">Choose</button>
-                </div>
-            </form>
-            </c:if>
-            <c:if test="${form2 != null}">
+                <h1 class="my-5">Add a grade</h1>
                 <form method="post" action="Addgrade">
                     <div class="form-group">
-                        <select class="form-control" id="subject" name="subject">
-                            <option  selected="selected">Choose a subject</option>
-                            <c:forEach items="${gradess}" var="grade">
-                                <option value="${grade.value.getId()}">${grade.value.getSubject().getName()}</option>
+                        <select class="form-control my-4" id="student" name="student">
+                            <option  selected="selected">Choose a student</option>
+                            <c:forEach items="${studentss}" var="student">
+                                <option value="${student.getId()}">${student.getName()} ${student.getSurname()}</option>
                             </c:forEach>
                         </select>
-                        <button type="submit" class="btn btn-success my-3">Choose</button>
+                        <select class="form-control" id="subject" name="subject">
+                            <option  selected="selected">Choose a subject</option>
+                            <c:forEach items="${subjectss}" var="subject">
+                                <option value="${subject.getId()}">${subject.getName()}</option>
+                            </c:forEach>
+                        </select>
+                        <button type="submit" class="btn btn-success my-4">Choose</button>
                     </div>
                 </form>
             </c:if>
-            <c:if test="${form3 != null}">
-                <h1>${Addgrade.student.getName()} ${Addgrade.student.getSurname()}</h1>
-                <h3>${Addgrade.subject.getName()}</h3>
-            <form method="post" action="Updategrade">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="gradevalue" value="${gradeValue}" required>
-                    <button name="gradeid" value="${Addgrade.grade.getId()}" type="submit" class="btn btn-info my-2">Change the grade</button>
-                </div>
-            </form>
+            <c:if test="${form2 != null}">
+                <h3 class="my-4">Add or modify a grade for <i><b>${gradee.getStudent().getName()} ${gradee.getStudent().getSurname()}</b></i></h3>
+                <h3 class="my-5">Subject: <i>${gradee.getSubject().getName()}</i></h3>
+                <form>
+                    <div class="form-group">
+                        <label for="gradeValue">Current grade: </label>
+                        <c:if test="${gradee.getGrade() == 0}">
+                            <input id="gradeValue" class="form-control" type="text" placeholder="Not graded yet" name="gradeValue">
+                        </c:if>
+                        <c:if test="${gradee.getGrade() != 0}">
+                        <input id="gradeValue" class="form-control" type="text" value="${gradee.getGrade()}" name="gradeValue">
+                        </c:if>
+                        <button type="submit" class="btn btn-info my-3">Submit</button>
+                    </div>
+                </form>
             </c:if>
+
         </div>
     </div>
 </div>

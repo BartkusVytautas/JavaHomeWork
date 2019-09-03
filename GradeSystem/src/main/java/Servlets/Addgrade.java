@@ -15,38 +15,33 @@ import java.io.IOException;
 @WebServlet(name = "Addgrade", urlPatterns = {"/Addgrade"})
 public class Addgrade extends HttpServlet {
 
-    public static Student student;
-    public static Subject subject;
     public static Grades grade;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("student") != null) {
-            Integer sid = Integer.parseInt(request.getParameter("student"));
-            request.setAttribute("form1", 1);
-            request.setAttribute("form2", 1);
-            Student s = Student.getStudent(sid);
-            student = s;
-            request.setAttribute("gradess", s.getStudentGrades());
-            System.out.println(s.getStudentGrades());
-            RequestDispatcher dispatcher =request.getRequestDispatcher("/addgrade.jsp");
-            dispatcher.forward(request, response);
+        request.setAttribute("form1", 1);
+        request.setAttribute("form2", 2);
+        Integer studentId = Integer.parseInt(request.getParameter("student"));
+        Integer subjectId = Integer.parseInt(request.getParameter("subject"));
+        for (Grades g: Grades.getGrades()){
+            if((g.getStudent().getId() == Student.getStudent(studentId).getId()) && (g.getSubject().getId() == Subject.getSubject(subjectId).getId())){
+                grade = g;
+                break;
+            }
         }
-        if (request.getParameter("subject") !=null){
-            request.setAttribute("form2", null);
-            request.setAttribute("form3", 1);
-            Integer gradeId = Integer.parseInt(request.getParameter("subject"));
-            request.setAttribute("gradeValue", Grades.getGrade(gradeId).getId());
-            grade = Grades.getGrade(gradeId);
-            subject = Grades.getGrade(gradeId).getSubject();
-            RequestDispatcher dispatcher =request.getRequestDispatcher("/addgrade.jsp");
-            dispatcher.forward(request, response);
-        }
+
+        request.setAttribute("gradee", grade);
+        RequestDispatcher dispatcher =request.getRequestDispatcher("/addgrade.jsp");
+        dispatcher.forward(request, response);
+
+
+
 
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("studentss", Student.studentList());
+        request.setAttribute("subjectss", Subject.subjectList());
         RequestDispatcher dispatcher =request.getRequestDispatcher("/addgrade.jsp");
         dispatcher.forward(request, response);
 
