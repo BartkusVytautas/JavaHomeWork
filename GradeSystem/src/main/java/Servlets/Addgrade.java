@@ -18,6 +18,17 @@ public class Addgrade extends HttpServlet {
     public static Grades grade;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if(request.getParameter("addchange") != null){
+            grade = Grades.getGrade(Integer.parseInt(request.getParameter("addchange")));
+            grade.setGrade(Integer.parseInt(request.getParameter("gradeValue")));
+            grade.update();
+            request.setAttribute("form1", null);
+            request.setAttribute("form2", null);
+            response.sendRedirect("Display");
+            return;
+        }
+
         request.setAttribute("form1", 1);
         request.setAttribute("form2", 2);
         Integer studentId = Integer.parseInt(request.getParameter("student"));

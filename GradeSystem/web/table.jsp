@@ -98,13 +98,14 @@
                                 <td>#</td>
                                 <td>${subject.getName()}</td>
                                 <td>${subject.getDescription()}</td>
-                                <td><a href="Delete?deletesub=${subject.getId()}" class="btn btn-danger">Delete</a><a href="Addgrade" class="btn btn-info mx-3">Add a grade/Modify</a></td>
+                                <td><a href="Delete?deletesub=${subject.getId()}" class="btn btn-danger">Delete</a><a href="Addgrade" class="btn btn-warning mx-3">Modify</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
                     <c:if test="${canAddSubj == null}">
                         <a href="Addsubject" class="btn btn-success my-3">Add new subject</a>
+                        <a href="Addgrade" class="btn btn-info mx-3">Add grades</a>
                     </c:if>
                     <c:if test="${canAddSubj != null}">
                         <form method="post" action="Addsubject">

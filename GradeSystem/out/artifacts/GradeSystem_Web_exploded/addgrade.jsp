@@ -60,17 +60,17 @@
             </c:if>
             <c:if test="${form2 != null}">
                 <h3 class="my-4">Add or modify a grade for <i><b>${gradee.getStudent().getName()} ${gradee.getStudent().getSurname()}</b></i></h3>
-                <h3 class="my-5">Subject: <i>${gradee.getSubject().getName()}</i></h3>
-                <form>
+                <h3 class="my-5">Subject: <i><b>${gradee.getSubject().getName()}</b></i></h3>
+                <form action="Addgrade" method="post">
                     <div class="form-group">
                         <label for="gradeValue">Current grade: </label>
-                        <c:if test="${gradee.getGrade() == 0}">
+                        <c:if test="${gradee.getGrade() < 1}">
                             <input id="gradeValue" class="form-control" type="text" placeholder="Not graded yet" name="gradeValue">
                         </c:if>
-                        <c:if test="${gradee.getGrade() != 0}">
+                        <c:if test="${gradee.getGrade() > 0}">
                         <input id="gradeValue" class="form-control" type="text" value="${gradee.getGrade()}" name="gradeValue">
                         </c:if>
-                        <button type="submit" class="btn btn-info my-3">Submit</button>
+                        <button name="addchange" value="${gradee.getId()}" type="submit" class="btn btn-info my-3">Submit</button>
                     </div>
                 </form>
             </c:if>

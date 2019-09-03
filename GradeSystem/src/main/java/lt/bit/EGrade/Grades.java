@@ -120,6 +120,7 @@ public class Grades{
             preparedStatement.setInt(1, this.grade);
             preparedStatement.setInt(2, this.id);
             preparedStatement.executeUpdate();
+            Grades.grades = null;
         } catch (Exception e) {
             e.printStackTrace();
         }
