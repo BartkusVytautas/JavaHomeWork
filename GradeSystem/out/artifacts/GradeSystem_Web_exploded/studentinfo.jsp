@@ -37,6 +37,8 @@
 <body>
     <a href="Logout" class="btn btn-danger my-4 mx-4">Logout</a>
     <div class="container my-5">
+        <div class="card">
+            <div class="card-body">
         <h1>${student.getName()} ${student.getSurname()}</h1>
         <c:if test="${modifyStudent == null}">
              <a href="ModifyStudent?modifystudent=1&studentid=${student.getId()}" class="btn btn-success my-3">Change info</a>
@@ -79,6 +81,8 @@
                 </c:forEach>
             </tbody>
         </table>
+        </div>
+        </div>
     </div>
 
 
