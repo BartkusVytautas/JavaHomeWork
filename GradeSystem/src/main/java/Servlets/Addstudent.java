@@ -17,8 +17,7 @@ public class Addstudent extends HttpServlet {
         String surname = request.getParameter("surname");
         Student.addStudent(name, surname);
         request.setAttribute("canAdd", null);
-        RequestDispatcher dispatcher =request.getRequestDispatcher("/Display");
-        dispatcher.forward(request, response);
+        response.sendRedirect("Display");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
