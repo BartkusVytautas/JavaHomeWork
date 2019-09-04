@@ -18,8 +18,7 @@ public class Addsubject extends HttpServlet {
         String description = request.getParameter("description");
         Subject.addSubject(name, description);
         request.setAttribute("canAddSubj", null);
-        RequestDispatcher dispatcher =request.getRequestDispatcher("/Display");
-        dispatcher.forward(request, response);
+       response.sendRedirect("Display");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -40,12 +40,14 @@ public class Login extends HttpServlet {
         for(Cookie c: request.getCookies()){
             if(c.getName().equals("logged") && c.getValue().equals("logged")){
                 response.sendRedirect("Display");
+                System.out.println(1);
                 return;
             }
         }
         if (request.getSession().getAttribute("login") != null) {
             if ((Integer) request.getSession().getAttribute("login") == 1) {
                 response.sendRedirect("Display");
+                System.out.println(2);
                 return;
             }
 

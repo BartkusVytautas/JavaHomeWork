@@ -18,7 +18,8 @@ public class Logout extends HttpServlet {
         request.getSession().setAttribute("login", 0);
         for(Cookie c: request.getCookies()){
             if(c.getName().equals("logged")){
-                c.setValue("not logged in");
+                c.setValue("loggedout");
+                response.addCookie(c);
                 break;
             }
         }

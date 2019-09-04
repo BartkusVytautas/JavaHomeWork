@@ -22,10 +22,12 @@ public class Display extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie cookie = null;
-        for(Cookie c: request.getCookies()){
-            if(c.getName().equals("logged") && c.getValue().equals("logged")){
-                cookie = c;
-                break;
+        if(request.getCookies() != null) {
+            for (Cookie c : request.getCookies()) {
+                if (c.getName().equals("logged") && c.getValue().equals("logged")) {
+                    cookie = c;
+                    break;
+                }
             }
         }
         if(cookie == null) {
