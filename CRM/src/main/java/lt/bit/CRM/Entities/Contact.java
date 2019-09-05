@@ -18,7 +18,7 @@ public class Contact {
     private Integer costumer_id;
 
     @CreationTimestamp
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date")
     private Date date;
 

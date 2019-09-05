@@ -4,6 +4,7 @@ package lt.bit.CRM.Entities;
 import javax.persistence.*;
 
 @Entity
+
 @Table(name = "companies")
 public class Company {
 
@@ -49,7 +50,7 @@ public class Company {
         return name;
     }
 
-    public String getAdress() {
+    public String getAddress() {
         return adress;
     }
 
