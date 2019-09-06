@@ -33,7 +33,7 @@
             font-family: Raleway, sans-serif !important;
         }
         td, th {
-            font-size: 10px !important;
+
         }
 
     </style>
@@ -44,8 +44,9 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <h1 class="my-4">Companies info:</h1>
+                    <form action="Add" method="post">
                     <table class="table">
                         <thead class="thead-light">
                         <tr>
@@ -54,25 +55,91 @@
                             <th>Name</th>
                             <th>Phone</th>
                             <th>Vat-code</th>
+                            <th>Email</th>
                             <th>Options</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${companies}" var="company">
                             <tr>
+                                <c:if test="${mod1 == null || company.getId() != mod1}">
                                 <td>${company.getCompany_name()}</td>
                                 <td>${company.getAddress()}</td>
                                 <td>${company.getName()}</td>
                                 <td>${company.getPhone()}</td>
                                 <td>${company.getVat_code()}</td>
-                                <td><a href="" class="btn btn-danger">Delete</a><a href="" class="btn btn-info py-2">Modify</a></td>
+                                <td>${company.getEmail()}</td>
+                                <td><a href="Delete?delete=${company.getId()}&company=1" class="btn btn-danger">Delete</a><a href="Modify?modify=${company.getId()}&table=1" class="btn btn-info">Modify</a></td>
+                                </c:if>
+                                <c:if test="${mod1 != null}">
+                                    <c:if test="${company.getId() == mod1}">
+                                        <div class="form-group">
+                                            <td><input class="form-control" id="compname" type="text" name="compname" value="${company.get}"></td>
+                                            <td><input class="form-control" id="address" type="text" name="address"></td>
+                                            <td><input class="form-control" id="name" type="text" name="name"></td>
+                                            <td><input class="form-control" id="phone" type="text" name="phone"></td>
+                                            <td><input class="form-control" id="vat" type="text" name="vat"></td>
+                                            <td><input class="form-control" id="email" type="text" name="email"></td>
+                                            <td><button type="submit" id="company" class="btn btn-success" name="company">Add</button></td>
+                                        </div>
+                                    </c:if>
+                                </c:if>
+                                
                             </tr>
                         </c:forEach>
+                        <c:if test="${table1 != null}">
+                            <tr>
+                                <div class="form-group">
+                                    <td><input class="form-control" type="text" name="compname"></td>
+                                    <td><input class="form-control" type="text" name="address"></td>
+                                    <td><input class="form-control" type="text" name="name"></td>
+                                    <td><input class="form-control" type="text" name="phone"></td>
+                                    <td><input class="form-control" type="text" name="vat"></td>
+                                    <td><input class="form-control" type="text" name="email"></td>
+                                    <td><button type="submit" class="btn btn-success" name="company">Add</button></td>
+                                </div>
+                            </tr>
+                        </c:if>
                         </tbody>
                     </table>
+                    </form>
+                    <c:if test="${table1 == null}"><a href="Add?add=1" class="btn btn-success my-3">Add new</a></c:if>
 
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
+                    <h1 class="my-4">Contact info:</h1>
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Costumer id</th>
+                            <th>Conversation summary</th>
+                            <th>Date</th>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${contacts}" var="contact">
+                                <tr>
+                                    <td>${contact.getCostumer_id()}</td>
+                                    <td>${contact.getConversation()}</td>
+                                    <td>${contact.getDate()}</td>
+                                    <td><a href="" class="btn btn-danger">Delete</a><a href="" class="btn btn-info mx-2">Modify</a></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <c:if test="${table2 == null}"><a href="Add?add=2" class="btn btn-success my-3">Add new</a></c:if>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
                     <h1 class="my-4">Costumers info:</h1>
                     <table class="table">
                         <thead class="thead-dark">
@@ -97,39 +164,22 @@
                                 <td>${costumer.getPhone()}</td>
                                 <td>${costumer.getPosition()}</td>
                                 <td>${costumer.getCompany_id()}</td>
-                                <td><a href="" class="btn btn-danger">Delete</a><a href="" class="btn btn-info py-2">Modify</a></td>
+                                <td><a href="" class="btn btn-danger">Delete</a><a href="" class="btn btn-info mx-2">Modify</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container fluid">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="my-4">Contact info:</h1>
-                    <table class="table">
-                        <thead class="thead-light">
-                        <tr>
-                            <th>Costumer id</th>
-                            <th>Conversation summary</th>
-                            <th>Date</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    <c:if test="${table3 == null}"><a href="Add?add=3" class="btn btn-success my-3">Add new</a></c:if>
 
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
 
 
 
