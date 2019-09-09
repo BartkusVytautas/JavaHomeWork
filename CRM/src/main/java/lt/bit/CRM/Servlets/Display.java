@@ -4,6 +4,7 @@ import lt.bit.CRM.Connections.SingletonSession;
 import lt.bit.CRM.Entities.Company;
 import lt.bit.CRM.Entities.Contact;
 import lt.bit.CRM.Entities.Costumer;
+import lt.bit.CRM.Entities.Item;
 import org.hibernate.Session;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,9 +29,12 @@ public class Display extends javax.servlet.http.HttpServlet {
         List<Company> companies = session.createQuery("from Company").list();
         List<Costumer> costumers = session.createQuery("from Costumer ").list();
         List<Contact> contacts = session.createQuery("from Contact").list();
+        List<Item> items = session.createQuery("from Item").list();
         request.setAttribute("companies", companies);
         request.setAttribute("costumers", costumers);
         request.setAttribute("contacts", contacts);
+        request.setAttribute("items", items);
+
         session.getTransaction().commit();
         session.close();
         RequestDispatcher dispatcher =request.getRequestDispatcher("/index.jsp");

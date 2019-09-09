@@ -27,6 +27,9 @@ public class Modify extends HttpServlet {
             case 3:
                 request.setAttribute("mod3", id);
                 break;
+            case 4:
+                request.setAttribute("mod4", id);
+                break;
             default:
         }
 

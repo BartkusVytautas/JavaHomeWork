@@ -8,11 +8,12 @@
         <property name="connection.password">admin</property>
         <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect
         </property>
-        <property name="show_sql">true</property>
+        <property name="show_sql">false</property>
         <property name="hbm2ddl.auto">update</property>
         <!-- Use Annotation-based mapping metadata -->
         <mapping class="lt.bit.CRM.Entities.Company" />
         <mapping class="lt.bit.CRM.Entities.Contact" />
         <mapping class="lt.bit.CRM.Entities.Costumer" />
+        <mapping class="lt.bit.CRM.Entities.Item" />
     </session-factory>
 </hibernate-configuration>

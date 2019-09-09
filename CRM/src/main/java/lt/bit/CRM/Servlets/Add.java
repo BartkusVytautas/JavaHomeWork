@@ -4,6 +4,7 @@ import lt.bit.CRM.Connections.SingletonSession;
 import lt.bit.CRM.Entities.Company;
 import lt.bit.CRM.Entities.Contact;
 import lt.bit.CRM.Entities.Costumer;
+import lt.bit.CRM.Entities.Item;
 import org.hibernate.Session;
 
 import javax.servlet.RequestDispatcher;
@@ -19,6 +20,14 @@ public class Add extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Session session = SingletonSession.getSession();
         session.beginTransaction();
+        if(request.getParameter("item") != null){
+            String item_name = request.getParameter("itemname");
+            Double item_price = Double.parseDouble(request.getParameter("itemprice"));
+            Item i = new Item(item_name, item_price);
+            session.save(i);
+
+        }
+
         if(request.getParameter("company") != null){
             String comp_name = request.getParameter("compname");
             String address = request.getParameter("address");
@@ -49,20 +58,95 @@ public class Add extends HttpServlet {
             session.save(costumer);
         }
         if(request.getParameter("contact") != null){
-            String conversation = request.getParameter("conversation");
             Integer costumer_id = Integer.parseInt(request.getParameter("costumerid"));
-            Costumer costumer = session.get(Costumer.class, costumer_id);
             Contact contact = new Contact();
-            contact.setConversation(conversation);
-            contact.setCostumer(costumer);
+            Costumer c = session.get(Costumer.class, costumer_id);
+            contact.setCostumer(c);
+            String[] items=request.getParameterValues("itemadd");
+            for(String s: items){
+                c.getItems().add(session.get(Item.class, Integer.parseInt(s)));
+
+            }
             session.save(contact);
         }
+        if(request.getParameter("companymod") != null){
+            Integer compId = Integer.parseInt(request.getParameter("companymod"));
+            String comp_name = request.getParameter("compname2");
+            String address = request.getParameter("address2");
+            String name = request.getParameter("name2");
+            String phone = request.getParameter("phone2");
+            String vat = request.getParameter("vat2");
+            String email = request.getParameter("email2");
+            Company c = session.get(Company.class, compId);
+            c.setAdress(address);
+            c.setCompany_name(comp_name);
+            c.setEmail(email);
+            c.setName(name);
+            c.setVat_code(vat);
+            c.setPhone(phone);
+            session.save(c);
+            request.setAttribute("mod1", null);
+
+        }
+
+        if(request.getParameter("costumermod") != null){
+            String cost_name = request.getParameter("costname2");
+            String cost_surname = request.getParameter("costsurname2");
+            String cost_address = request.getParameter("costaddress2");
+            String cost_email = request.getParameter("costemail2");
+            String cost_phone = request.getParameter("costphone2");
+            String cost_position = request.getParameter("costposition2");
+            Integer cost_id = Integer.parseInt(request.getParameter("costumermod"));
+            Integer comp_id = Integer.parseInt(request.getParameter("companyid2"));
+            Costumer c = session.get(Costumer.class, cost_id);
+            c.setName(cost_name);
+            c.setSurname(cost_surname);
+            c.setPosition(cost_position);
+            c.setPhone(cost_phone);
+            c.setEmail(cost_email);
+            c.setAddress(cost_address);
+            c.setCompany(session.get(Company.class, comp_id));
+            session.save(c);
+            request.setAttribute("mod2", null);
+        }
+
+        if(request.getParameter("contactmod") != null){
+            Integer cont_id = Integer.parseInt(request.getParameter("contactmod"));
+            Integer cost_id = Integer.parseInt(request.getParameter("costumerid"));
+            Contact c = session.get(Contact.class, cont_id);
+            Costumer cost = session.get(Costumer.class, cost_id);
+            c.setCostumer(cost);
+            String[] items=request.getParameterValues("itemadd");
+            for(String s: items){
+                System.out.println(s);
+                cost.getItems().add(session.get(Item.class, Integer.parseInt(s)));
+
+            }
+            session.save(c);
+
+            request.setAttribute("mod2", null);
+
+        }
+
+        if(request.getParameter("itemmod") != null){
+            Integer item_id = Integer.parseInt(request.getParameter("itemmod"));
+            String name = request.getParameter("itemname2");
+            Double price = Double.parseDouble(request.getParameter("itemprice2"));
+            Item i = session.get(Item.class, item_id);
+            i.setName(name);
+            i.setPrice(price);
+            session.save(i);
+        }
+
+
+
 
         session.getTransaction().commit();
         session.close();
         request.setAttribute("table1", null);
         request.setAttribute("table2", null);
         request.setAttribute("table3", null);
+        request.setAttribute("table4", null);
         response.sendRedirect("Display");
     }
 
@@ -78,6 +162,8 @@ public class Add extends HttpServlet {
            case 3:
                request.setAttribute("table3", 1);
                break;
+           case 4:
+               request.setAttribute("table4", 1);
            default:
        }
         RequestDispatcher dispatcher =request.getRequestDispatcher("/Display");

@@ -17,6 +17,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/09d1a309d1.js"></script>
 
     <title>CRM</title>
     <style>
@@ -74,13 +75,13 @@
                                 <c:if test="${mod1 != null}">
                                     <c:if test="${company.getId() == mod1}">
                                         <div class="form-group">
-                                            <td><input class="form-control" id="compname" type="text" name="compname" value=""></td>
-                                            <td><input class="form-control" id="address" type="text" name="address"></td>
-                                            <td><input class="form-control" id="name" type="text" name="name"></td>
-                                            <td><input class="form-control" id="phone" type="text" name="phone"></td>
-                                            <td><input class="form-control" id="vat" type="text" name="vat"></td>
-                                            <td><input class="form-control" id="email" type="text" name="email"></td>
-                                            <td><button type="submit" id="company" class="btn btn-success" name="company">Add</button></td>
+                                            <td><input class="form-control" id="compname" type="text" name="compname2" value="${company.getCompany_name()}"></td>
+                                            <td><input class="form-control" id="address" type="text" name="address2" value="${company.getAddress()}"></td>
+                                            <td><input class="form-control" id="name" type="text" name="name2" value="${company.getName()}"></td>
+                                            <td><input class="form-control" id="phone" type="text" name="phone2" value="${company.getPhone()}"></td>
+                                            <td><input class="form-control" id="vat" type="text" name="vat2" value="${company.getVat_code()}"></td>
+                                            <td><input class="form-control" id="email" type="text" name="email2" value="${company.getEmail()}"></td>
+                                            <td><button type="submit" id="company" class="btn btn-success" name="companymod" value="${company.getId()}">Save</button></td>
                                         </div>
                                     </c:if>
                                 </c:if>
@@ -113,7 +114,7 @@
                         <thead class="thead-light">
                         <tr>
                             <th>Costumer name</th>
-                            <th>Conversation summary</th>
+                            <th>Talked about: </th>
                             <th>Date</th>
                             <th>Options</th>
                         </tr>
@@ -121,10 +122,33 @@
                         <tbody>
                             <c:forEach items="${contacts}" var="contact">
                                 <tr>
+                                    <c:if test="${mod3 == null || contact.getId() != mod3}">
                                     <td>${contact.getCostumer().getName()} ${contact.getCostumer().getSurname()}</td>
-                                    <td>${contact.getConversation()}</td>
+                                    <td>
+                                        <c:forEach items="${contact.getCostumer().getItems()}" var="item">
+                                            ${item.getName()} <a href="Delete?deleteitem=${item.getId()}&costumerid=${contact.getCostumer().getId()}"><i style="color: crimson" class="fas fa-times-circle"></i></a><br>
+                                        </c:forEach>
+                                    </td>
                                     <td>${contact.getDate()}</td>
-                                    <td><a href="Delete?delete${contact.getId()}&contact=1" class="btn btn-danger d-block">Delete</a><a href="" class="btn btn-info d-block my-2">Modify</a></td>
+                                    <td><a href="Delete?delete=${contact.getId()}&contact=1" class="btn btn-danger d-block">Delete</a><a href="Modify?modify=${contact.getId()}&table=3" class="btn btn-info d-block my-2">Modify</a></td>
+                                    </c:if>
+                                    <c:if test="${mod3 != null}">
+                                        <c:if test="${contact.getId() == mod3}">
+                                            <div class="form-group">
+                                                <td>
+                                                    <select class="form-control" name="costumerid">
+                                                        <option>Select a costumer:</option>
+                                                        <c:forEach items="${costumers}" var="costumer">
+                                                            <option value="${costumer.getId()}">${costumer.getName()} ${costumer.getSurname()}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </td>
+                                                <td><input class="form-control" id="conversation2" type="text" name="conversation2" value="${contact.getConversation()}"></td>
+                                                <td>${contact.getDate()}</td>
+                                                <td><button type="submit" id="contact" class="btn btn-success" name="contactmod" value="${contact.getId()}">Save</button></td>
+                                            </div>
+                                        </c:if>
+                                    </c:if>
                                 </tr>
                             </c:forEach>
                             <c:if test="${table2 != null}">
@@ -138,7 +162,14 @@
                                                 </c:forEach>
                                             </select>
                                         </td>
-                                        <td><input class="form-control" type="text" name="conversation"></td>
+                                        <td>
+                                           <c:forEach items="${items}" var="item">
+                                               <div class="d-block">
+                                               <label class="d-inline" for="item${item.getId()}">${item.getName()}</label>
+                                               <input class="d-inline" id="item${item.getId()}" class="form-control" type="checkbox" name="itemadd" value="${item.getId()}">
+                                               </div>
+                                           </c:forEach>
+                                        </td>
                                         <td>#</td>
                                         <td><button type="submit" class="btn btn-success" name="contact">Add</button></td>
                                     </div>
@@ -155,10 +186,10 @@
     </div>
 </div>
 <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
                     <h1 class="my-4">Costumers info:</h1>
                     <form action="Add" method="post">
                     <table class="table">
@@ -177,6 +208,7 @@
                         <tbody>
                         <c:forEach items="${costumers}" var="costumer">
                             <tr>
+                                <c:if test="${mod2 == null || costumer.getId() != mod2}">
                                 <td>${costumer.getName()}</td>
                                 <td>${costumer.getSurname()}</td>
                                 <td>${costumer.getAddress()}</td>
@@ -184,7 +216,29 @@
                                 <td>${costumer.getPhone()}</td>
                                 <td>${costumer.getPosition()}</td>
                                 <td>${costumer.getCompany().getCompany_name()}</td>
-                                <td><a href="Delete?delete=${costumer.getId()}&costumer=1" class="btn btn-danger d-block">Delete</a><a href="" class="btn btn-info d-block my-2">Modify</a></td>
+                                <td><a href="Delete?delete=${costumer.getId()}&costumer=1" class="btn btn-danger d-block">Delete</a><a href="Modify?modify=${costumer.getId()}&table=2" class="btn btn-info d-block my-2">Modify</a></td>
+                                </c:if>
+                                <c:if test="${mod2 != null}">
+                                    <c:if test="${costumer.getId() == mod2}">
+                                        <div class="form-group">
+                                            <td><input class="form-control" id="costname2" type="text" name="costname2" value="${costumer.getName()}"></td>
+                                            <td><input class="form-control" id="costsurname2" type="text" name="costsurname2" value="${costumer.getSurname()}"></td>
+                                            <td><input class="form-control" id="costaddress2" type="text" name="costaddress2" value="${costumer.getAddress()}"></td>
+                                            <td><input class="form-control" id="costemail2" type="text" name="costemail2" value="${costumer.getEmail()}"></td>
+                                            <td><input class="form-control" id="costphone2" type="text" name="costphone2" value="${costumer.getPhone()}"></td>
+                                            <td><input class="form-control" id="costposition2" type="text" name="costposition2" value="${costumer.getPosition()}"></td>
+                                            <td>
+                                                <select class="form-control" name="companyid2">
+                                                    <option selected>Select a company:</option>
+                                                    <c:forEach items="${companies}" var="company">
+                                                        <option value="${company.getId()}">${company.getCompany_name()}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </td>
+                                            <td><button type="submit" id="costumer" class="btn btn-success" name="costumermod" value="${costumer.getId()}">Save</button></td>
+                                        </div>
+                                    </c:if>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         <c:if test="${table3 != null}">
@@ -214,10 +268,57 @@
                     <c:if test="${table3 == null}"><a href="Add?add=3" class="btn btn-success my-3">Add new</a></c:if>
 
                 </div>
+
+        <div class="col-md-4">
+            <form action="Add" method="post">
+                <h1 class="my-4">Items info:</h1>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Item name</th>
+                            <th>Item price</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${items}" var="item">
+                        <tr>
+                            <c:if test="${mod4 == null || item.getId() != mod4}">
+                                <td>${item.getName()}</td>
+                                <td>${item.getPrice()}</td>
+                                <td><a href="Delete?delete${item.getId()}&item=1" class="btn btn-danger d-block">Delete</a><a href="Modify?modify=${item.getId()}&table=4" class="btn btn-info d-block my-2">Modify</a></td>
+                            </c:if>
+                            <c:if test="${mod4 != null}">
+                                <c:if test="${item.getId() == mod4}">
+                                    <div class="form-group">
+                                        <td><input class="form-control" id="itemname2" type="text" name="itemname2" value="${item.getName()}"></td>
+                                        <td><input class="form-control" id="itemprice2" type="text" name="itemprice2" value="${item.getPrice()}"></td>
+                                        <td><button type="submit" id="item" class="btn btn-success" name="itemmod" value="${item.getId()}">Save</button></td>
+                                    </div>
+                                </c:if>
+                            </c:if>
+                        </tr>
+                    </c:forEach>
+                    <c:if test="${table4 != null}">
+                        <tr>
+                            <div class="form-group">
+                                <td><input class="form-control" type="text" name="itemname"></td>
+                                <td><input class="form-control" type="text" name="itemprice"></td>
+                                <td><button type="submit" class="btn btn-success" name="item">Add</button></td>
+                            </div>
+                        </tr>
+                    </c:if>
+                    </tbody>
+                </table>
+            </form>
+            <c:if test="${table4 == null}"><a href="Add?add=4" class="btn btn-success my-3">Add new</a></c:if>
+            </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 
 

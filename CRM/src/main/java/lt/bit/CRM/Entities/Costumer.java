@@ -38,6 +38,11 @@ public class Costumer {
     @OneToMany(mappedBy = "costumer")
     private Set<Contact> contacts = new HashSet<>();
 
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "costumer_item",
+            joinColumns = @JoinColumn(name = "costumer_id"),
+            inverseJoinColumns = @JoinColumn(name="item_id"))
+    private Set<Item> items;
 
 
 
@@ -56,6 +61,14 @@ public class Costumer {
 
     public Company getCompany() {
         return company;
+    }
+
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
     }
 
     public void setCompany(Company company) {
@@ -126,4 +139,5 @@ public class Costumer {
     public void setContacts(Set<Contact> contacts) {
         this.contacts = contacts;
     }
+
 }
