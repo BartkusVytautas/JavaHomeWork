@@ -25,7 +25,7 @@ public class Add extends HttpServlet {
             String name = request.getParameter("name");
             String phone = request.getParameter("phone");
             String vat = request.getParameter("vat");
-            String email = request.getParameter("vat");
+            String email = request.getParameter("email");
             Company c = new Company(name, address, vat, comp_name, phone, email);
             session.save(c);
         }

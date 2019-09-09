@@ -139,6 +139,7 @@
                                             </select>
                                         </td>
                                         <td><input class="form-control" type="text" name="conversation"></td>
+                                        <td>#</td>
                                         <td><button type="submit" class="btn btn-success" name="contact">Add</button></td>
                                     </div>
                                 </tr>
