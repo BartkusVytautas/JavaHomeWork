@@ -69,12 +69,12 @@
                                 <td>${company.getPhone()}</td>
                                 <td>${company.getVat_code()}</td>
                                 <td>${company.getEmail()}</td>
-                                <td><a href="Delete?delete=${company.getId()}&company=1" class="btn btn-danger">Delete</a><a href="Modify?modify=${company.getId()}&table=1" class="btn btn-info">Modify</a></td>
+                                <td><a href="Delete?delete=${company.getId()}&company=1" class="btn btn-danger d-block">Delete</a><a href="Modify?modify=${company.getId()}&table=1" class="btn btn-info d-block my-2">Modify</a></td>
                                 </c:if>
                                 <c:if test="${mod1 != null}">
                                     <c:if test="${company.getId() == mod1}">
                                         <div class="form-group">
-                                            <td><input class="form-control" id="compname" type="text" name="compname" value="${company.get}"></td>
+                                            <td><input class="form-control" id="compname" type="text" name="compname" value=""></td>
                                             <td><input class="form-control" id="address" type="text" name="address"></td>
                                             <td><input class="form-control" id="name" type="text" name="name"></td>
                                             <td><input class="form-control" id="phone" type="text" name="phone"></td>
@@ -108,10 +108,11 @@
                 </div>
                 <div class="col-md-5">
                     <h1 class="my-4">Contact info:</h1>
+                    <form method="post" action="Add">
                     <table class="table">
                         <thead class="thead-light">
                         <tr>
-                            <th>Costumer id</th>
+                            <th>Costumer name</th>
                             <th>Conversation summary</th>
                             <th>Date</th>
                             <th>Options</th>
@@ -120,14 +121,32 @@
                         <tbody>
                             <c:forEach items="${contacts}" var="contact">
                                 <tr>
-                                    <td>${contact.getCostumer_id()}</td>
+                                    <td>${contact.getCostumer().getName()} ${contact.getCostumer().getSurname()}</td>
                                     <td>${contact.getConversation()}</td>
                                     <td>${contact.getDate()}</td>
-                                    <td><a href="" class="btn btn-danger">Delete</a><a href="" class="btn btn-info mx-2">Modify</a></td>
+                                    <td><a href="Delete?delete${contact.getId()}&contact=1" class="btn btn-danger d-block">Delete</a><a href="" class="btn btn-info d-block my-2">Modify</a></td>
                                 </tr>
                             </c:forEach>
+                            <c:if test="${table2 != null}">
+                                <tr>
+                                    <div class="form-group">
+                                        <td>
+                                            <select class="form-control" name="costumerid">
+                                                <option>Select a costumer:</option>
+                                                <c:forEach items="${costumers}" var="costumer">
+                                                    <option value="${costumer.getId()}">${costumer.getName()} ${costumer.getSurname()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </td>
+                                        <td><input class="form-control" type="text" name="conversation"></td>
+                                        <td>#</td>
+                                        <td><button type="submit" class="btn btn-success" name="contact">Add</button></td>
+                                    </div>
+                                </tr>
+                            </c:if>
                         </tbody>
                     </table>
+                    </form>
                     <c:if test="${table2 == null}"><a href="Add?add=2" class="btn btn-success my-3">Add new</a></c:if>
 
                 </div>
@@ -141,6 +160,7 @@
             <div class="card">
                 <div class="card-body">
                     <h1 class="my-4">Costumers info:</h1>
+                    <form action="Add" method="post">
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
@@ -150,7 +170,7 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Position</th>
-                            <th>Company id</th>
+                            <th>Company name</th>
                             <th>Options</th>
                         </tr>
                         </thead>
@@ -163,12 +183,34 @@
                                 <td>${costumer.getEmail()}</td>
                                 <td>${costumer.getPhone()}</td>
                                 <td>${costumer.getPosition()}</td>
-                                <td>${costumer.getCompany_id()}</td>
-                                <td><a href="" class="btn btn-danger">Delete</a><a href="" class="btn btn-info mx-2">Modify</a></td>
+                                <td>${costumer.getCompany().getCompany_name()}</td>
+                                <td><a href="Delete?delete=${costumer.getId()}&costumer=1" class="btn btn-danger d-block">Delete</a><a href="" class="btn btn-info d-block my-2">Modify</a></td>
                             </tr>
                         </c:forEach>
+                        <c:if test="${table3 != null}">
+                            <tr>
+                                <div class="form-group">
+                                    <td><input class="form-control" type="text" name="costname"></td>
+                                    <td><input class="form-control" type="text" name="surname"></td>
+                                    <td><input class="form-control" type="text" name="costaddress"></td>
+                                    <td><input class="form-control" type="text" name="costemail"></td>
+                                    <td><input class="form-control" type="text" name="costphone"></td>
+                                    <td><input class="form-control" type="text" name="position"></td>
+                                    <td>
+                                        <select class="form-control" name="companyid">
+                                            <option>Select a company:</option>
+                                            <c:forEach items="${companies}" var="company">
+                                                <option value="${company.getId()}">${company.getCompany_name()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                    <td><button type="submit" class="btn btn-success" name="costumer">Add</button></td>
+                                </div>
+                            </tr>
+                        </c:if>
                         </tbody>
                     </table>
+                </form>
                     <c:if test="${table3 == null}"><a href="Add?add=3" class="btn btn-success my-3">Add new</a></c:if>
 
                 </div>

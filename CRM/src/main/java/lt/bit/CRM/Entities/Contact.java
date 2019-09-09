@@ -14,8 +14,7 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "costumer_id")
-    private Integer costumer_id;
+
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -25,21 +24,30 @@ public class Contact {
     @Column(name = "conversation")
     private String conversation;
 
+    @ManyToOne
+    @JoinColumn(name = "costumer_id", nullable = false)
+    private Costumer costumer;
+
+
     public Contact() {
     }
 
-    public Contact(Integer costumer_id, String conversation) {
-        this.costumer_id = costumer_id;
+    public Contact(String conversation) {
         this.conversation = conversation;
+    }
+
+    public Costumer getCostumer() {
+        return costumer;
+    }
+
+    public void setCostumer(Costumer costumer) {
+        this.costumer = costumer;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Integer getCostumer_id() {
-        return costumer_id;
-    }
 
     public Date getDate() {
         return date;
@@ -53,9 +61,6 @@ public class Contact {
         this.id = id;
     }
 
-    public void setCostumer_id(Integer costumer_id) {
-        this.costumer_id = costumer_id;
-    }
 
     public void setDate(Date date) {
         this.date = date;

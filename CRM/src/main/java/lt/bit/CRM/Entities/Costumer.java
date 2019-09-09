@@ -2,6 +2,8 @@ package lt.bit.CRM.Entities;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "costumers")
@@ -29,20 +31,35 @@ public class Costumer {
     @Column(name = "position")
     private String position;
 
-    @Column(name = "company_id")
-    private Integer company_id;
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "company_id", nullable = true )
+    private Company company;
+
+    @OneToMany(mappedBy = "costumer")
+    private Set<Contact> contacts = new HashSet<>();
+
+
+
 
     public Costumer() {
     }
 
-    public Costumer(String name, String surname, String phone, String email, String address, String position, Integer company_id) {
+    public Costumer(String name, String surname, String phone, String email, String address, String position) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.position = position;
-        this.company_id = company_id;
+
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Integer getId() {
@@ -73,9 +90,6 @@ public class Costumer {
         return position;
     }
 
-    public Integer getCompany_id() {
-        return company_id;
-    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -105,7 +119,11 @@ public class Costumer {
         this.position = position;
     }
 
-    public void setCompany_id(Integer company_id) {
-        this.company_id = company_id;
+    public Set<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
     }
 }

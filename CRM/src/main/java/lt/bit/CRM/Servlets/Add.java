@@ -2,6 +2,8 @@ package lt.bit.CRM.Servlets;
 
 import lt.bit.CRM.Connections.SingletonSession;
 import lt.bit.CRM.Entities.Company;
+import lt.bit.CRM.Entities.Contact;
+import lt.bit.CRM.Entities.Costumer;
 import org.hibernate.Session;
 
 import javax.servlet.RequestDispatcher;
@@ -27,6 +29,35 @@ public class Add extends HttpServlet {
             Company c = new Company(name, address, vat, comp_name, phone, email);
             session.save(c);
         }
+        if(request.getParameter("costumer") != null){
+            String cost_name = request.getParameter("costname");
+            String cost_surname = request.getParameter("surname");
+            String cost_address = request.getParameter("costaddress");
+            String cost_email = request.getParameter("costemail");
+            String cost_phone = request.getParameter("costphone");
+            String cost_position = request.getParameter("position");
+            Integer company_id = Integer.parseInt(request.getParameter("companyid"));
+            Company comp = session.get(Company.class, company_id);
+            Costumer costumer = new Costumer();
+            costumer.setName(cost_name);
+            costumer.setSurname(cost_surname);
+            costumer.setAddress(cost_address);
+            costumer.setEmail(cost_email);
+            costumer.setPhone(cost_phone);
+            costumer.setPosition(cost_position);
+            costumer.setCompany(comp);
+            session.save(costumer);
+        }
+        if(request.getParameter("contact") != null){
+            String conversation = request.getParameter("conversation");
+            Integer costumer_id = Integer.parseInt(request.getParameter("costumerid"));
+            Costumer costumer = session.get(Costumer.class, costumer_id);
+            Contact contact = new Contact();
+            contact.setConversation(conversation);
+            contact.setCostumer(costumer);
+            session.save(contact);
+        }
+
         session.getTransaction().commit();
         session.close();
         request.setAttribute("table1", null);

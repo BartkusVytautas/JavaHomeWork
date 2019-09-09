@@ -2,6 +2,8 @@ package lt.bit.CRM.Entities;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 
@@ -29,6 +31,10 @@ public class Company {
 
     @Column(name = "email")
     private String email;
+
+    @OneToMany(mappedBy = "company", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Set<Costumer> costumers = new HashSet<>();
+
 
     public Company() {
     }
@@ -96,5 +102,17 @@ public class Company {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public Set<Costumer> getCostumers() {
+        return costumers;
+    }
+
+    public void setCostumers(Set<Costumer> costumers) {
+        this.costumers = costumers;
     }
 }
