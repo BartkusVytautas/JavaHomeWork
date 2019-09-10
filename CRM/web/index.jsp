@@ -137,13 +137,35 @@
                                             <div class="form-group">
                                                 <td>
                                                     <select class="form-control" name="costumerid">
-                                                        <option>Select a costumer:</option>
+
                                                         <c:forEach items="${costumers}" var="costumer">
-                                                            <option value="${costumer.getId()}">${costumer.getName()} ${costumer.getSurname()}</option>
+                                                            <c:if test="${contact.getCostumer().getId() == costumer.getId()}">
+                                                            <option selected value="${costumer.getId()}">${costumer.getName()} ${costumer.getSurname()}</option>
+                                                            </c:if>
+                                                            <c:if test="${contact.getCostumer().getId() != costumer.getId()}">
+                                                                <option value="${costumer.getId()}">${costumer.getName()} ${costumer.getSurname()}</option>
+                                                            </c:if>
+
                                                         </c:forEach>
                                                     </select>
                                                 </td>
-                                                <td><input class="form-control" id="conversation2" type="text" name="conversation2" value="${contact.getConversation()}"></td>
+                                                <td>
+                                                    <c:forEach items="${items}" var="item">
+                                                        <c:if test="${contact.getCostumer().getItems().contains(item)}">
+                                                            <div class="d-block">
+                                                                <label class="d-inline" for="item${item.getId()}">${item.getName()}</label>
+                                                                <input class="d-inline" id="item${item.getId()}" class="form-control" type="checkbox" checked name="itemadd2" value="${item.getId()}">
+                                                            </div>
+                                                        </c:if>
+                                                        <c:if test="${!contact.getCostumer().getItems().contains(item)}">
+                                                            <div class="d-block">
+                                                                <label class="d-inline" for="item${item.getId()}">${item.getName()}</label>
+                                                                <input class="d-inline" id="item${item.getId()}" class="form-control" type="checkbox" name="itemadd2" value="${item.getId()}">
+                                                            </div>
+                                                        </c:if>
+
+                                                    </c:forEach>
+                                                </td>
                                                 <td>${contact.getDate()}</td>
                                                 <td><button type="submit" id="contact" class="btn btn-success" name="contactmod" value="${contact.getId()}">Save</button></td>
                                             </div>
@@ -229,9 +251,13 @@
                                             <td><input class="form-control" id="costposition2" type="text" name="costposition2" value="${costumer.getPosition()}"></td>
                                             <td>
                                                 <select class="form-control" name="companyid2">
-                                                    <option selected>Select a company:</option>
                                                     <c:forEach items="${companies}" var="company">
-                                                        <option value="${company.getId()}">${company.getCompany_name()}</option>
+                                                        <c:if test="${costumer.getCompany().getId() == company.getId()}">
+                                                        <option selected value="${company.getId()}">${company.getCompany_name()}</option>
+                                                        </c:if>
+                                                        <c:if test="${costumer.getCompany().getId() != company.getId()}">
+                                                            <option value="${company.getId()}">${company.getCompany_name()}</option>
+                                                        </c:if>
                                                     </c:forEach>
                                                 </select>
                                             </td>
