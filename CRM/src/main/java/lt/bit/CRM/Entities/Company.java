@@ -2,6 +2,7 @@ package lt.bit.CRM.Entities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,20 +16,35 @@ public class Company {
     private Integer id;
 
     @Column(name = "name")
+    @NotNull(message = "field is required")
+    @Size(min = 4, max = 15, message = "Name should be 4-15 characters long")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Invalid format")
     private String name;
 
+    @NotNull(message = "field is required")
+    @Size(max = 50, message = "Address should have maximum 50 characters")
     @Column(name = "adress")
     private String adress;
 
+    @Size(max = 10, message = "Vat code should have maximum 10 characters")
     @Column(name = "vat_code")
     private String vat_code;
 
+    @NotNull(message = "field is required")
+    @Size(min = 4, max = 15, message = "Company name should be 4-15 characters long")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Invalid format")
     @Column(name = "company_name")
     private String company_name;
 
+    @NotNull(message = "field is required")
+    @Size(min = 12, max = 12, message = "Phone should have 12 symbols")
+//    @Pattern(regexp = "^[+]\d{11}$", message = "Invalid format")
     @Column(name = "phone")
     private String phone;
 
+    @NotNull(message = "field is required")
+    @Email(message = "Invalid format")
+    @Size(max = 25, message = "Email should have maximum 25 characters")
     @Column(name = "email")
     private String email;
 

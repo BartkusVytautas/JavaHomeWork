@@ -2,6 +2,7 @@ package lt.bit.CRM.Entities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,21 +14,38 @@ public class Costumer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull(message = "field is required")
+    @Size(min = 4, max = 15, message = "Name should be 4-15 characters long")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Invalid format")
     @Column(name = "name")
     private String name;
 
+    @NotNull(message = "field is required")
+    @Size(min = 4, max = 15, message = "Surname should be 4-15 characters long")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Invalid format")
     @Column(name = "surname")
     private String surname;
 
+    @NotNull(message = "field is required")
+    @Size(min = 12, max = 12, message = "Phone should have 12 symbols")
+//    @Pattern(regexp = "^[+]\d{11}$", message = "Invalid format")
     @Column(name = "phone")
     private String phone;
 
+    @NotNull(message = "field is required")
+    @Email(message = "Invalid format")
+    @Size(max = 25, message = "Email should have maximum 25 characters")
     @Column(name = "email")
     private String email;
 
+    @NotNull(message = "field is required")
+    @Size(max = 50, message = "Address should have maximum 50 characters")
     @Column(name = "address")
     private String address;
 
+    @NotNull(message = "field is required")
+    @Size(max = 20, message = "Position should have maximum 20 characters")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Invalid format")
     @Column(name = "position")
     private String position;
 

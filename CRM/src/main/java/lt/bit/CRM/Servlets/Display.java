@@ -34,10 +34,13 @@ public class Display extends javax.servlet.http.HttpServlet {
         request.setAttribute("costumers", costumers);
         request.setAttribute("contacts", contacts);
         request.setAttribute("items", items);
+        request.setAttribute("errors", Add.errors);
 
         session.getTransaction().commit();
         session.close();
         RequestDispatcher dispatcher =request.getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
+        Add.modal = 0;
+        Add.errors.clear();
     }
 }
