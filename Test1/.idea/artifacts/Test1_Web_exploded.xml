@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="Test1:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Test1_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Test1/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Test1" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="jstl:jstl:1.2" />
+          <element id="library" level="project" name="Hibernate 5.4.4-5.4.4" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.1" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.17" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
+          <element id="library" level="project" name="org.hibernate.validator:hibernate-validator:6.0.17.Final" />
+          <element id="library" level="project" name="org.glassfish:javax.el:3.0.1-b09" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
