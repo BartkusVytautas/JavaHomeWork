@@ -117,6 +117,7 @@ public class Add extends HttpServlet {
             Costumer cost = session.get(Costumer.class, cost_id);
             c.setCostumer(cost);
             String[] items=request.getParameterValues("itemadd2");
+            cost.getItems().clear();
             for(String s: items){
                 cost.getItems().add(session.get(Item.class, Integer.parseInt(s)));
 
