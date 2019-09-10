@@ -34,6 +34,14 @@
             font-family: Raleway, sans-serif !important;
         }
         td, th {
+            border-color: #343a40 !important;
+        }
+
+        .card {
+            background-color: #71ffeb !important;
+        }
+
+        table{
 
         }
 
