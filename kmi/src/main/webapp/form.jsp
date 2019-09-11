@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,9 +18,46 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title></title>
+    <title>KMI</title>
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+        body{
+            font-size: .9rem;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #212529;
+            text-align: left;
+            background-color: #f5f8fa !important;
+            font-family: Raleway, sans-serif !important;
+        }
+    </style>
 </head>
 <body>
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form:form action="display" modelAttribute="kmi"  method="POST">
+                        <div class="form-group">
+                            <label for="height">Enter your height in m:</label>
+                            <form:input path="height" id="height" class="form-control" />
+                            <label for="weight">Enter your weight in kg:</label>
+                            <form:input path="weight" id="weight" class="form-control"/>
+                            <input type="submit" class="btn btn-primary my-2">
+                        </div>
+                    </form:form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<input type="submit" value="Submit" />
 
 
 <!-- Optional JavaScript -->

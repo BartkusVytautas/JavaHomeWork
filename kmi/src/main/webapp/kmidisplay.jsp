@@ -21,6 +21,8 @@
 </head>
 <body>
 
+<h1>${kmi.KMIcalculation()}</h1>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
