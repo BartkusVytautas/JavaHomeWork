@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>KMI</title>
+    <title>BMI</title>
 
     <style>
         @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
@@ -36,17 +36,18 @@
 <body>
 
 <div class="container-fluid">
-    <div class="card">
-        <div class="card-body">
-            <div class="row justify-content-center">
+    <div class="row justify-content-center">
                 <div class="col-md-8">
+                    <h1 class="my-5">BMI calculator</h1>
+                    <div class="card my-5">
+                        <div class="card-body">
                     <form:form action="display" modelAttribute="kmi"  method="POST">
                         <div class="form-group">
                             <label for="height">Enter your height in m:</label>
-                            <form:input path="height" id="height" class="form-control" />
+                            <form:input path="height" id="height" class="form-control my-2" />
                             <label for="weight">Enter your weight in kg:</label>
-                            <form:input path="weight" id="weight" class="form-control"/>
-                            <input type="submit" class="btn btn-primary my-2">
+                            <form:input path="weight" id="weight" class="form-control my-2"/>
+                            <input type="submit" class="btn btn-primary my-2" value="Calculate">
                         </div>
                     </form:form>
                 </div>
@@ -55,9 +56,6 @@
     </div>
 </div>
 
-
-
-<input type="submit" value="Submit" />
 
 
 <!-- Optional JavaScript -->

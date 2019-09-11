@@ -25,6 +25,7 @@ public class KMI {
     }
 
     public Double KMIcalculation(){
-        return this.weight / (this.height * this.height);
+
+        return (Math.round((this.weight / (this.height * this.height)) * 100) / (double)100);
     }
 }
