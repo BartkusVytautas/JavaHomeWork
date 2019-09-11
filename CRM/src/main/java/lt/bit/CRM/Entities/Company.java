@@ -38,7 +38,7 @@ public class Company {
 
     @NotNull(message = "field is required")
     @Size(min = 12, max = 12, message = "Phone should have 12 symbols")
-//    @Pattern(regexp = "^[+]\d{11}$", message = "Invalid format")
+    @Pattern(regexp = "^[+]\\d{11}$", message = "Invalid format")
     @Column(name = "phone")
     private String phone;
 

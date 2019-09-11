@@ -154,7 +154,7 @@ public class Add extends HttpServlet {
         }catch (ConstraintViolationException e){
             modal = 1;
             for (ConstraintViolation<?> c: e.getConstraintViolations()) {
-                errors.add(c.getPropertyPath().toString()+": " + c.getMessage() + "\n");
+                errors.add(c.getPropertyPath().toString().toUpperCase()+": " + c.getMessage() + "\n");
             }
             response.sendRedirect("Display");
             return;

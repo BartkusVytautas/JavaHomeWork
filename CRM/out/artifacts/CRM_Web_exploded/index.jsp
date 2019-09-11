@@ -370,7 +370,7 @@
             </div>
             <div class="modal-body">
                 <c:forEach items="${errors}" var="error">
-                    ${error}<br>
+                    <b>${error}</b><br>
                 </c:forEach>
             </div>
             <div class="modal-footer">
